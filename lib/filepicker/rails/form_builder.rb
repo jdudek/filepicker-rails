@@ -4,8 +4,7 @@ module Filepicker
 
       def filepicker_field(method, options = {})
         input_options = {
-          'data-fp-apikey' =>
-          ::Rails.application.config.filepicker_rails.api_key,
+          'data-fp-apikey' => Filepicker::Rails.config.api_key,
 
           'data-fp-button-text' => options.fetch(:button_text, "Pick File"),
 
