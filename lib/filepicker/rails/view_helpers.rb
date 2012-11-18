@@ -25,8 +25,7 @@ module Filepicker
 
 
       def filepicker_image_tag(url, options={})
-        url = URI.regexp.match(url).nil? ? url : filepicker_image_url(url, options)
-        image_tag(url,
+        image_tag(filepicker_image_url(url, options),
           width: options[:w],
           height: options[:w],
 
