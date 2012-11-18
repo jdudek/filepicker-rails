@@ -1,3 +1,5 @@
+require "uri"
+
 module Filepicker
   module Rails
 
@@ -70,7 +72,7 @@ module Filepicker
       def filepicker_image_url(url, options = {})
         query_params = options.slice(:w,:h,:fit,:crop,:format,:quality,
           :watermark,:watersize,:waterposition).to_query
-        url.include?("https://www.filepicker.io") ? [url, "/convert?", query_params].join : url
+        URI.regexp.match(url).nil? ? url : [url, "/convert?", query_params].join
       end
 
     end
