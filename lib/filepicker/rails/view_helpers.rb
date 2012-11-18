@@ -25,7 +25,8 @@ module Filepicker
 
 
       def filepicker_image_tag(url, options={})
-        image_tag(filepicker_image_url(url, options),
+        url = URI.regexp.match(url).nil? ? url : filepicker_image_url(url, options)
+        image_tag(url,
           width: options[:w],
           height: options[:w],
 
@@ -72,11 +73,7 @@ module Filepicker
       def filepicker_image_url(url, options = {})
         query_params = options.slice(:w,:h,:fit,:crop,:format,:quality,
           :watermark,:watersize,:waterposition).to_query
-        if URI.regexp.match(url).nil?
-          url
-        else
-          [url, "/convert?", query_params].join
-        end
+        [url, "/convert?", query_params].join
       end
     end
   end
