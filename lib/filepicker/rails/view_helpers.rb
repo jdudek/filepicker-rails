@@ -70,7 +70,7 @@ module Filepicker
       def filepicker_image_url(url, options = {})
         query_params = options.slice(:w,:h,:fit,:crop,:format,:quality,
           :watermark,:watersize,:waterposition).to_query
-        url.include? "https://www.filepicker.io/api/file" ? [url, "/convert?", query_params].join : url
+        url.include?("https://www.filepicker.io") ? [url, "/convert?", query_params].join : url
       end
 
     end
