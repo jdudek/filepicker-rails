@@ -25,7 +25,11 @@ module Filepicker
 
 
       def filepicker_image_tag(url, options={})
-        image_tag(filepicker_image_url(url, options), options)
+        if url.match(/^https:\/\/www.filepicker.io\/api\/file\/(\w*)/).nil?
+          image_tag(url, options.slice(:width, :height, :alt)
+        else
+          image_tag(filepicker_image_url(url, options), options.slice(:alt))
+        end
       end
 
       # w - Resize the image to this width.
@@ -66,8 +70,8 @@ module Filepicker
       #                 and horizontal with a comma. The default behavior
       #                 is bottom,right
       def filepicker_image_url(url, options = {})
-        query_params = options.slice(:width,:height,:fit,:crop,:align,:format,:quality,:watermark,:watersize,:waterposition).to_query
-        url.match(/^https:\/\/www.filepicker.io\/api\/file\/(\w*)/).nil? ? url : [url, "/convert?", query_params].join
+        query_params = options.slice(:width, :height, :fit, :crop, :align, :format, :quality, :watermark,:watersize, :waterposition).to_query
+        [url, "/convert?", query_params].join
       end
     end
   end
